@@ -20,6 +20,9 @@ const PdfDownload: React.FC<any> = ({ navigation }) => {
           html: `<html>
           <body>
           <h1>Name : Test User</h1>
+          <h1>Age : 30</h1>
+          <h1>Height : 5.6ft</h1>
+          <h1>Weight : 70Kg</h1>
           <img src=${uri}>
           </body>
           </html>`,
