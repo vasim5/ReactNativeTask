@@ -6,21 +6,26 @@ import {
 import ViewShot from "react-native-view-shot";
 import RNHTMLtoPDF from 'react-native-html-to-pdf';
 import MainContainer from "../components/MainContainer";
+import Colors from "../constants/Colors";
 
 const PdfDownload: React.FC<any> = ({ navigation }) => {
 
   const ref: any = useRef()
 
   const DownloadPdf = () => {
+    //checking ViewShot reference is not null
     if (ref.current != null) {
+      //Capturing SS of graph
       ref.current.capture().then(async (uri: string) => {
+        //Captured graph SS.
         console.log("SS uri", uri);
-
+        
+        //Creating object with html string to save as pdf
         let options = {
           html: `<html>
           <body>
           <h1>Name : Test User</h1>
-          <h1>Age : 30</h1>
+          <h1>Age : ScreenSizes.size30</h1>
           <h1>Height : 5.6ft</h1>
           <h1>Weight : 70Kg</h1>
           <img src=${uri}>
@@ -29,8 +34,11 @@ const PdfDownload: React.FC<any> = ({ navigation }) => {
           fileName: 'test',
           directory: 'Documents',
         };
+        //Generating pdf from options
         await RNHTMLtoPDF.convert(options).then((path) => {
+          //Pdf generated
           console.log(path.filePath);
+          //If platform is android will show Toast otherwise will show alert dialog for completed acknowledgement.
           if (Platform.OS === 'android') {
             ToastAndroid.show(`Your file saved at ${path.filePath}`, ToastAndroid.SHORT)
           } else {
@@ -71,9 +79,9 @@ const PdfDownload: React.FC<any> = ({ navigation }) => {
             yAxisSuffix="k"
             yAxisInterval={1} // optional, defaults to 1
             chartConfig={{
-              backgroundColor: "#e26a00",
-              backgroundGradientFrom: "#fb8c00",
-              backgroundGradientTo: "#ffa726",
+              backgroundColor: Colors.colorChartBG,
+              backgroundGradientFrom: Colors.colorChartGradientFrom,
+              backgroundGradientTo: Colors.colorChartGradientTo,
               decimalPlaces: 2, // optional, defaults to 2dp
               color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -83,7 +91,7 @@ const PdfDownload: React.FC<any> = ({ navigation }) => {
               propsForDots: {
                 r: "6",
                 strokeWidth: "2",
-                stroke: "#ffa726"
+                stroke: Colors.colorChartGradientTo
               }
             }}
             bezier
@@ -96,7 +104,7 @@ const PdfDownload: React.FC<any> = ({ navigation }) => {
       </ViewShot>
       <TouchableWithoutFeedback onPress={DownloadPdf}>
         <View style={styles.btnStyle}>
-          <Text style={{ color: "#000000" }}>Download Pdf</Text>
+          <Text style={{ color: Colors.colorBlack }}>Download Pdf</Text>
         </View>
       </TouchableWithoutFeedback>
     </MainContainer>
@@ -106,13 +114,13 @@ export default PdfDownload;
 
 const styles = StyleSheet.create({
   viewShotMain: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: Colors.colorWhite,
     paddingHorizontal: 16,
     paddingVertical: 12
   },
   btnStyle: {
     height: 48,
-    backgroundColor: "#F66257",
+    backgroundColor: Colors.colorRed,
     marginHorizontal: 16,
     borderRadius: 10,
     alignItems: "center",

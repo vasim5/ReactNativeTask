@@ -1,21 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { StatusBar, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import MainContainer from '../components/MainContainer';
+import Colors from '../constants/Colors';
+import Fonts from '../constants/Fonts';
 
 const Splash: React.FC<any> = ({ navigation }) => {
-    useEffect(() => {
-        console.log("yes in splash");
-
-        /* setTimeout(async () => {
-          navigation.push("Pdf");
-        }, 200); */
-
-    }, []);
 
     return (
         <MainContainer header={{}}>
-            <StatusBar backgroundColor={'#191C20'}
+            <StatusBar backgroundColor={Colors.colorRed}
                 translucent={true} barStyle={'light-content'} />
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <TouchableHighlight style={styles.clickableView}
@@ -26,7 +19,7 @@ const Splash: React.FC<any> = ({ navigation }) => {
                     onPress={() => navigation.push("PdfDownload")}>
                     <Text style={styles.clickableText}>Pdf</Text>
                 </TouchableHighlight>
-                <Text style={{ color: "#FFFFFF" }}>Demo</Text>
+                <Text style={{ color: Colors.colorWhite }}>Demo</Text>
             </View>
         </MainContainer>
     );
@@ -38,14 +31,14 @@ const styles = StyleSheet.create({
     clickableView: {
         width: "80%",
         height: 80,
-        marginVertical:16,
+        marginVertical: 16,
         borderRadius: 30,
-        backgroundColor: "#F66257",
+        backgroundColor: Colors.colorRed,
         alignItems: "center",
         justifyContent: "center"
     },
     clickableText: {
-        color: "#FFFFFF",
-        fontSize: 20
+        color: Colors.colorWhite,
+        fontSize: Fonts.size.size20
     }
 })

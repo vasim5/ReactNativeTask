@@ -1,5 +1,7 @@
 import React from "react";
 import { Image, Platform, SafeAreaView, StatusBar, StyleSheet, Text, TouchableHighlight, View } from "react-native";
+import Colors from "../constants/Colors";
+import Fonts from "../constants/Fonts";
 import { getStatusBarHeight } from "../constants/StatusbarHeight";
 
 interface header {
@@ -9,13 +11,13 @@ interface header {
 
 const MainContainer: React.FC<any> = ({ children, navigation, header }) => {
     return (
-        <View style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
+        <View style={{ flex: 1, backgroundColor: Colors.colorWhite }}>
             <View>
                 <StatusBar translucent={true} />
             </View>
             <SafeAreaView
                 style={{
-                    backgroundColor: "#F66257",
+                    backgroundColor: Colors.colorRed,
                     height: Platform.OS === "ios" ? 64 : 56,
                     marginTop: getStatusBarHeight()
                 }}>
@@ -38,7 +40,7 @@ const MainContainer: React.FC<any> = ({ children, navigation, header }) => {
                             header.title != undefined ?
                                 <Text numberOfLines={1}
                                     style={{
-                                        color: "#FFFFFF", alignSelf: 'center',
+                                        color: Colors.colorWhite, alignSelf: 'center',
                                         ...styles.titleStyle
                                     }}>{header.title}
                                 </Text> : null
@@ -74,11 +76,11 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         marginHorizontal: 4,
-        fontSize: 20,
-        color: "#FFFFFF"
+        fontSize: Fonts.size.size20,
+        color: Colors.colorWhite
     },
     titleStyle: {
-        fontSize: 20,
+        fontSize: Fonts.size.size20,
     },
     iconStyle: {
         marginHorizontal: 4,
@@ -89,6 +91,6 @@ const styles = StyleSheet.create({
         resizeMode: "contain",
         width: 18,
         height: 18,
-        tintColor: "#FFFFFF"
+        tintColor: Colors.colorWhite
     }
 })

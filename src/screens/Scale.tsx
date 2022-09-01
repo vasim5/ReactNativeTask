@@ -1,9 +1,13 @@
 import React, { useRef, useState } from "react";
-import { useEffect } from "react";
 import { Dimensions, ImageBackground, NativeScrollEvent, NativeSyntheticEvent, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import MainContainer from "../components/MainContainer";
+import Colors from "../constants/Colors";
+import Fonts from "../constants/Fonts";
 
+//Calculating device width
 const deviceWidth = Dimensions.get('window').width;
+
+//Calculating width of each one dot in scale
 const width = deviceWidth / 35;
 
 const getScale = () => {
@@ -20,13 +24,16 @@ const Scale: React.FC<any> = ({ navigation }) => {
 
     const ref: any = useRef()
 
-
+    //called when user scroll the scrollview
     const onScrollEndDrag = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+        //calculated value with scrollview offset divide by the width(of dot) and adding the starting value 40 to the scale
         setSelectedValue((event.nativeEvent.contentOffset.x / width + 40).toFixed(0));
     }
 
+    //called when scroll animation end
     const onScrollAnimationEnd = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
         setSelectedValue((event.nativeEvent.contentOffset.x / width + 40).toFixed(0));
+        //Scrolling to nearest dot point if user stop at in between to dots.
         ref.current?.scrollTo({ x: Math.ceil(event.nativeEvent.contentOffset.x) })
     }
 
@@ -96,10 +103,11 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     selectedValueText: {
-        color: "#000000"
+        color: Colors.colorBlack,
+        fontSize: Fonts.size.size20
     },
     scaleViewStyle: {
-        backgroundColor: "#F66257",
+        backgroundColor: Colors.colorRed,
         height: 200,
         marginTop: 100
     },
@@ -109,13 +117,13 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     dotStyle: {
-        backgroundColor: "#000000",
+        backgroundColor: Colors.colorBlack,
         width: 4,
         height: 4,
         borderRadius: 2,
     },
     whiteDotStyle: {
-        backgroundColor: "#FFFFFF",
+        backgroundColor: Colors.colorWhite,
         width: 8,
         height: 8,
         borderRadius: 4
